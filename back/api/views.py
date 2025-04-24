@@ -88,6 +88,23 @@ class ProductDetailView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 # Auth Views
+class RegisterView(APIView):
+    permission_classes = [AllowAny]
+    
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = User.objects.create_user(
+                username=serializer.validated_data['username'],
+                password=serializer.validated_data['password'],
+                email=serializer.validated_data.get('email', '')
+            )
+            return Response({
+                'user': UserSerializer(user).data,
+                'message': 'User created successfully'
+            }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class LoginView(APIView):
     permission_classes = [AllowAny]
     
