@@ -1,0 +1,15 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label>
+      User Name：
+      <input formControlName="username" required />
+    </label>
+    <label>
+      Password：
+      <input type="password" formControlName="password" required />
+    </label>
+    <button type="submit">login</button>
+    <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+  </form>
+</div>
