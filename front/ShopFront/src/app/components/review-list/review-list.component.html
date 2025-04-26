@@ -1,1 +1,21 @@
-<p>review-list works!</p>
+<div class="review-list">
+  <h2>Отзывы</h2>
+
+  <div *ngIf="loading" class="loading">Загрузка...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="!loading && !error && reviews.length === 0">
+    Отзывов пока нет.
+  </div>
+
+  <div *ngIf="reviews.length > 0" class="reviews">
+    <div class="review" *ngFor="let review of reviews">
+      <div class="review-header">
+        <strong>{{ review.name }}</strong>
+        <span class="rating">Рейтинг: {{ review.rating }}/5</span>
+      </div>
+      <p>{{ review.text }}</p>
+      <small>Дата: {{ review.created_at | date : "short" }}</small>
+    </div>
+  </div>
+</div>

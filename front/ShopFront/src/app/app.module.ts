@@ -1,40 +1,57 @@
-import {importProvidersFrom, NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import {HttpClientModule} from '@angular/common/http';
-import {AuthInterceptor} from './auth.interceptor';
-import { AppRoutingModule } from './app-routing.module';
+// Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ProductItemComponent } from './components/product-item/product-item.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { NewsDetailComponent } from './components/news-detail/news-detail.component';
 import { ReviewListComponent } from './components/review-list/review-list.component';
+import { NewsListComponent } from './components/news-list/news-list.component';
 import { ReviewCreateComponent } from './components/review-create/review-create.component';
 import { CommentaryListComponent } from './components/commentary-list/commentary-list.component';
+
+// Services and Interceptors
+import { ProductService } from './services/product.service';
+import { AuthService } from './services/auth.service';
+import { AuthInterceptor } from './auth.interceptor';
+
+// Routing
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ProductDetailComponent,
+    ProductItemComponent,
+    ProductListComponent,
     NewsDetailComponent,
     ReviewListComponent,
+    NewsListComponent,
     ReviewCreateComponent,
-    CommentaryListComponent
+    CommentaryListComponent,
   ],
   imports: [
+    CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    ProductListComponent
+    RouterModule.forRoot([
+      { path: '', component: LoginComponent },
+    ]),
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+  providers: [
+    ProductService,
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

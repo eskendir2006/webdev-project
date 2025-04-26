@@ -1,53 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService} from '../../services/product.service';
-import { Product} from '../../models/product';
-import {FormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ProductItemComponent } from '../product-item/product-item.component';
+import { Product } from '../../models/product';
+import { ProductService } from '../../services/product.service';
+import { environment } from '../../../enviroments/environment';
 
 @Component({
   selector: 'app-product-list',
+  standalone: false,
   templateUrl: './product-list.component.html',
-  imports: [
-    FormsModule,
-    CommonModule,
-  ]
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  products: Product[] = [];
-  newProduct: Product = { id: 0, name: '', photo_url: '', description: [], quantity: 0, created_at: '' };
-  editProduct: Product | null = null;
+  @Input() products: Product[] = [];
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.loadProducts();
+    this.fetchProducts();
   }
 
-  loadProducts(): void {
-    this.productService.getProducts().subscribe(data => {
+  fetchProducts(): void {
+    this.productService.getProducts().subscribe((data: Product[]) => {
       this.products = data;
     });
   }
 
-  onDelete(productId: number): void {
-    this.productService.deleteProduct(productId).subscribe(() => {
-      this.loadProducts();
-    });
-  }
-
-  onCreate(): void {
-    this.productService.createProduct(this.newProduct).subscribe(() => {
-      this.loadProducts();
-    });
-  }
-
-  onUpdate(): void {
-    if (this.editProduct) {
-      this.productService.updateProduct(this.editProduct.id!, this.editProduct).subscribe(() => {
-        this.loadProducts();
-        this.editProduct = null;
-      });
-    }
+  removeProduct(id: number): void {
+    this.products = this.products.filter((product) => product.id !== id);
   }
 }

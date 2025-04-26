@@ -1,0 +1,31 @@
+.review-list {
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.review {
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.review:last-child {
+  border-bottom: none;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.rating {
+  font-size: 14px;
+  color: #ff9900;
+}
+
+.loading,
+.error {
+  margin: 12px 0;
+  color: #777;
+}

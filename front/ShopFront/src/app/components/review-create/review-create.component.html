@@ -1,1 +1,31 @@
-<p>review-create works!</p>
+<div class="review-create">
+  <h2>Добавить отзыв</h2>
+
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Ваше имя:</label>
+      <input id="name" formControlName="name" type="text" />
+    </div>
+
+    <div class="form-group">
+      <label for="text">Ваш отзыв:</label>
+      <textarea id="text" formControlName="text" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="rating">Рейтинг:</label>
+      <input
+        id="rating"
+        formControlName="rating"
+        type="number"
+        min="1"
+        max="5"
+      />
+    </div>
+
+    <button type="submit" [disabled]="reviewForm.invalid">Отправить</button>
+  </form>
+
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+</div>

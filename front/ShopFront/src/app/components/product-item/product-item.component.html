@@ -1,0 +1,15 @@
+
+<div class="product-card">
+    <a class = "image_wapper" target="_blank">
+            <img [src]="product.photo_url" alt="{{ product.name }}" class="product-image">
+        </a>
+        <hr>
+        <div class = "product-card-info">
+            <div class = "product-card-name">
+            </div>
+
+            <p class= "price" [innerHTML]="product.description">{{ product.description }}</p>
+
+            <button class="remove-btn" (click)="removeProduct()">🗑 Remove</button>
+        </div>
+</div>

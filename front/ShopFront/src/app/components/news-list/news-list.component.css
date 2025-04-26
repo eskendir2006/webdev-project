@@ -1,0 +1,17 @@
+/* Пример стилей */
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+.news-item {
+  margin-bottom: 20px;
+}
+
+.news-item h2 {
+  color: #333;
+}
+
+.news-item p {
+  font-size: 1.1em;
+}

@@ -1,7 +1,9 @@
-<div class="news-detail-container" *ngIf="news">
-  <h2 class="news-title">{{ news.title }}</h2>
-  <div class="news-text">
-    <p *ngFor="let paragraph of news.text">{{ paragraph }}</p>
-  </div>
-  <p class="news-date">{{ news.created_at | date : "longDate" }}</p>
+<div *ngIf="newsItem">
+  <h1>{{ newsItem.title }}</h1>
+  <p>{{ newsItem.text }}</p>
+  <small>Created at: {{ newsItem.created_at | date:'medium' }}</small>
+</div>
+
+<div *ngIf="!newsItem">
+  <p>Loading...</p>
 </div>

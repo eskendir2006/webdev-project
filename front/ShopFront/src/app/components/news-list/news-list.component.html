@@ -1,0 +1,14 @@
+<div class="news-list">
+    <h2>Latest News</h2>
+    <ul>
+        <li class="news-item" *ngFor="let news of newsList">
+            <h3>
+                <a [routerLink]="['/news', news.id]">{{ news.title }}</a>
+            </h3>
+            <p>
+                {{ news.text }} 
+                <a [routerLink]="['/news', news.id]" target="_blank">Read more...</a>
+            </p>
+        </li>
+    </ul>
+</div>
