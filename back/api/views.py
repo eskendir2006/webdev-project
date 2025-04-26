@@ -47,6 +47,23 @@ def product_reviews(request, product_id):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET', 'POST'])
+@permission_classes([AllowAny])
+def news_commentary(request, news_id):
+    news = get_object_or_404(News, pk=news_id)
+    
+    if request.method == 'GET':
+        commentaries = news.commentaries.all()
+        serializer = CommentarySerializer(commentaries, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = CommentarySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(news=news)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 # Class Based Views
 class ProductListCreateView(APIView):
     permission_classes = [AllowAny]

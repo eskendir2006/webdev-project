@@ -1,1 +1,22 @@
-<p>commentary-list works!</p>
+<div class="commentary-list-container">
+  <h2>Комментарии</h2>
+
+  <!-- Форма добавления нового комментария -->
+  <form class="commentary-form" (ngSubmit)="onSubmit()">
+    <textarea
+      [(ngModel)]="newComment"
+      name="comment"
+      placeholder="Добавьте комментарий..."
+      required
+    ></textarea>
+    <button type="submit">Отправить</button>
+  </form>
+
+  <!-- Список комментариев -->
+  <div class="commentary-list">
+    <div *ngFor="let commentary of commentaries" class="commentary-item">
+      <p class="commentary-text">{{ commentary.text }}</p>
+      <button (click)="onDelete(commentary.id)">Удалить</button>
+    </div>
+  </div>
+</div>

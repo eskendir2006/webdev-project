@@ -1,15 +1,32 @@
 <div class="login-container">
-  <h2>Login</h2>
+  <h2>Войти в систему</h2>
+
+  <!-- Ошибка при входе -->
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <label>
-      User Name：
-      <input formControlName="username" required />
-    </label>
-    <label>
-      Password：
-      <input type="password" formControlName="password" required />
-    </label>
-    <button type="submit">login</button>
-    <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+    <div class="form-group">
+      <label for="username">Имя пользователя:</label>
+      <input
+        id="username"
+        type="text"
+        formControlName="username"
+        placeholder="Введите имя пользователя"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Пароль:</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="Введите пароль"
+        required
+      />
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid">Войти</button>
   </form>
 </div>

@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import {AuthService} from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
-
 
 @Component({
   standalone: false,
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -21,7 +20,7 @@ export class LoginComponent {
   ) {
     this.loginForm = this.fb.group({
       username: [''],
-      password: ['']
+      password: [''],
     });
   }
 
@@ -34,8 +33,7 @@ export class LoginComponent {
       },
       error: (err) => {
         this.errorMessage = err.error?.error || 'Login failed, try again';
-      }
+      },
     });
   }
 }
-
