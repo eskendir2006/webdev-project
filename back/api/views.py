@@ -49,7 +49,7 @@ def product_reviews(request, product_id):
 
 # Class Based Views
 class ProductListCreateView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     
     def get(self, request):
         products = Product.objects.all()
@@ -64,7 +64,7 @@ class ProductListCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ProductDetailView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     
     def get_object(self, pk):
         return get_object_or_404(Product, pk=pk)
